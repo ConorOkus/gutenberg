@@ -544,7 +544,7 @@ export class RichText extends Component {
 				const before = domToFormat( beforeNodes, format, this.editor );
 				const after = domToFormat( afterNodes, format, this.editor );
 
-				this.restoreContentAndSplit( before, after );
+				this.props.onSplit( before, after );
 			} else {
 				event.preventDefault();
 
@@ -664,7 +664,7 @@ export class RichText extends Component {
 			after = this.isEmpty( after ) ? null : after;
 		}
 
-		this.restoreContentAndSplit( before, after, blocks );
+		onSplit( before, after, ...blocks );
 	}
 
 	onNewBlock() {
@@ -710,7 +710,7 @@ export class RichText extends Component {
 		this.setContent( this.props.value );
 
 		const { format } = this.props;
-		this.restoreContentAndSplit(
+		this.props.onSplit(
 			domToFormat( before, format, this.editor ),
 			domToFormat( after, format, this.editor )
 		);
@@ -873,19 +873,6 @@ export class RichText extends Component {
 		this.setState( ( state ) => ( {
 			formats: merge( {}, state.formats, formats ),
 		} ) );
-	}
-
-	/**
-	 * Calling onSplit means we need to abort the change done by TinyMCE.
-	 * we need to call updateContent to restore the initial content before calling onSplit.
-	 *
-	 * @param {Array}  before content before the split position
-	 * @param {Array}  after  content after the split position
-	 * @param {?Array} blocks blocks to insert at the split position
-	 */
-	restoreContentAndSplit( before, after, blocks = [] ) {
-		this.setContent( this.props.value );
-		this.props.onSplit( before, after, ...blocks );
 	}
 
 	render() {

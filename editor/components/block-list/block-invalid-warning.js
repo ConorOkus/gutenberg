@@ -35,7 +35,7 @@ function BlockInvalidWarning( { convertToHTML, convertToBlocks } ) {
 				{ onClick: convertToHTML, title: __( 'Keep as HTML' ) },
 			] }
 		>
-			{ __( 'This block appears to have been modified externally.' ) }
+			{ __( 'This block has been modified externally.' ) }
 		</Warning>
 	);
 }

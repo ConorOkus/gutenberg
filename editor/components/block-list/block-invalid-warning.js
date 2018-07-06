@@ -15,20 +15,24 @@ import { withDispatch } from '@wordpress/data';
  */
 import Warning from '../warning';
 
-function InvalidBlockWarning( { convertToHTML, convertToBlocks } ) {
+function BlockInvalidWarning( { convertToHTML, convertToBlocks } ) {
 	const hasHTMLBlock = !! getBlockType( 'core/html' );
 
 	return (
 		<Warning
-			actions={ [
+			primaryActions={ [
 				<Button key="convert" onClick={ convertToBlocks } isLarge isPrimary={ ! hasHTMLBlock }>
 					{ __( 'Convert to Blocks' ) }
 				</Button>,
 				hasHTMLBlock && (
 					<Button key="edit" onClick={ convertToHTML } isLarge isPrimary>
-						{ __( 'Edit as HTML' ) }
+						{ __( 'Keep as HTML' ) }
 					</Button>
 				),
+			] }
+			hiddenActions={ [
+				{ onClick: convertToBlocks, title: __( 'Convert to Blocks' ) },
+				{ onClick: convertToHTML, title: __( 'Keep as HTML' ) },
 			] }
 		>
 			{ __( 'This block appears to have been modified externally.' ) }
@@ -51,4 +55,4 @@ export default withDispatch( ( dispatch, { block } ) => {
 			} ) );
 		},
 	};
-} )( InvalidBlockWarning );
+} )( BlockInvalidWarning );

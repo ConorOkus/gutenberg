@@ -36,7 +36,7 @@ import BlockEdit from '../block-edit';
 import BlockMover from '../block-mover';
 import BlockDropZone from '../block-drop-zone';
 import BlockSettingsMenu from '../block-settings-menu';
-import InvalidBlockWarning from './invalid-block-warning';
+import BlockInvalidWarning from './block-invalid-warning';
 import BlockCrashWarning from './block-crash-warning';
 import BlockCrashBoundary from './block-crash-boundary';
 import BlockHtml from './block-html';
@@ -546,7 +546,7 @@ export class BlockListBlock extends Component {
 							<div key="invalid-preview">
 								{ getSaveElement( blockType, block.attributes ) }
 							</div>,
-							<InvalidBlockWarning
+							<BlockInvalidWarning
 								key="invalid-warning"
 								block={ block }
 							/>,

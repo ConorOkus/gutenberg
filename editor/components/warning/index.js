@@ -1,13 +1,8 @@
 /**
- * External dependencies
- */
-import classnames from 'classnames';
-
-/**
  * WordPress dependencies
  */
 import { Children } from '@wordpress/element';
-import { Dropdown, IconButton, NavigableMenu, Button } from '@wordpress/components';
+import { Dropdown, IconButton, MenuGroup, MenuItem } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
 /**
@@ -35,39 +30,26 @@ function Warning( { primaryActions, children, hiddenActions } ) {
 			{ hiddenActions && (
 				<div className="editor-warning__hidden">
 					<Dropdown
+						className="edit-post-more-menu"
 						position="bottom left"
-						renderToggle={ ( { onToggle, isOpen } ) => {
-							const toggleClassname = classnames( 'editor-block-settings-menu__toggle', 'is-visible', {
-								'is-opened': isOpen,
-							} );
-							const label = isOpen ? __( 'Hide Options' ) : __( 'More Options' );
-
-							return (
-								<IconButton
-									className={ toggleClassname }
-									icon="ellipsis"
-									label={ label }
-									onClick={ onToggle }
-									aria-expanded={ isOpen }
-								/>
-							);
-						} }
+						renderToggle={ ( { isOpen, onToggle } ) => (
+							<IconButton
+								icon="ellipsis"
+								label={ __( 'More options' ) }
+								onClick={ onToggle }
+								aria-expanded={ isOpen }
+							/>
+						) }
 						renderContent={ () => (
-							<NavigableMenu
-								className="components-dropdown-menu__menu editor-warning__hidden-menu"
-								role="menu"
-							>
-								<p className="editor-warning__hidden-label">{ __( 'More options' ) }</p>
-								{ hiddenActions.map( ( item, pos ) =>
-									<Button
-										role="menuitem"
-										className="components-dropdown-menu__menu-item"
-										onClick={ item.onClick }
-										key={ pos }>
-										{ item.title }
-									</Button>
-								) }
-							</NavigableMenu>
+							<div className="edit-post-more-menu__content">
+								<MenuGroup label={ __( 'More options' ) }>
+									{ hiddenActions.map( ( item, pos ) =>
+										<MenuItem onClick={ item.onClick } key={ pos }>
+											{ item.title }
+										</MenuItem>
+									) }
+								</MenuGroup>
+							</div>
 						) }
 					/>
 				</div>

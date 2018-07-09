@@ -21,6 +21,9 @@
 		"**/?(*.)(spec|test).js",
 		"**/test/*.js"
 	],
+	"transform": {
+		"^.+\\.jsx?$": "babel-jest"
+	},
 	"timers": "fake",
 	"verbose": true
 }

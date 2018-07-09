@@ -6,11 +6,10 @@
 	],
 	"moduleNameMapper": {
 		"@wordpress\\/(blocks|components|editor|utils|edit-post|viewport|core-blocks|nux)$": "$1",
-		"@wordpress\\/(.*)$": "packages/$1/src"
+		"@wordpress\\/([a-z0-9-])$": "packages/$1/src"
 	},
 	"preset": "@wordpress/jest-preset-default",
 	"setupFiles": [
-		"core-js/fn/symbol/async-iterator",
 		"<rootDir>/test/unit/setup-blocks.js",
 		"<rootDir>/test/unit/setup-wp-aliases.js",
 		"<rootDir>/test/unit/setup-mocks.js"
